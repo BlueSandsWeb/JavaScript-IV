@@ -27,7 +27,7 @@ class GameObject {
 */
 class CharacterStats extends GameObject{
     constructor(stats) {
-        super(stats)
+        super(stats);
         this.healthPoints = stats.healthPoints;
         this.name = stats.name;
     }
@@ -46,18 +46,16 @@ class CharacterStats extends GameObject{
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
-
-function Humanoid(char) {
-    CharacterStats.call(this, char);
-    this.team = char.team;
-    this.weapons = char.weapons.join(", ");
-    this.language = char.language;
-}
-
-Humanoid.prototype = Object.create(CharacterStats.prototype);
-
-Humanoid.prototype.greet = function () {
-    return `${this.name} offers a greeting in ${this.language}.`;
+class Humanoid extends CharacterStats {
+    constructor(char) {
+        super(char);
+        this.team = char.team;
+        this.weapons = char.weapons.join(", ");
+        this.language = char.language;
+    }
+    greet() {
+        return `${this.name} offers a greeting in ${this.language}.`;
+    }
 }
 
 // Todo: add greet() and make inherit destroy and take Damage from CharacterStats
@@ -79,7 +77,7 @@ const mage = new Humanoid({
         height: 1,
     },
     healthPoints: 5,
-    name: 'Bruce',
+    name: 'Bruce',A
     team: 'Mage Guild',
     weapons: [
         'Staff of Shamalama',
@@ -135,18 +133,19 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 // Stretch task: 
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-function Hero(char) {
-    Humanoid.call(this, char);
-    this.harm = char.harm;
-}
 
-// Subtract hp from char attacked
-Hero.prototype.attack = function (target) {
-    target.healthPoints -= this.harm;
-    console.log(`${target.name} was attacked for ${this.harm} damage!!!`);
-    console.log(`${target.name} now has ${target.healthPoints} HP.`);
-    if (target.healthPoints <= 0) {
-        console.log(`${this.name} is the winner!`);
+class Hero extends Humanoid{
+    constructor(char){
+        super(char);
+        this.harm = char.harm;
+    }
+    attack(target){
+        target.healthPoints -= this.harm;
+        console.log(`${target.name} was attacked for ${this.harm} damage!!!`);
+        console.log(`${target.name} now has ${target.healthPoints} HP.`);
+        if (target.healthPoints <= 0) {
+            console.log(`${this.name} is the winner!`);
+        }
     }
 }
 
