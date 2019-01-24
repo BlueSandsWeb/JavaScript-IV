@@ -25,13 +25,13 @@ class GameObject {
   * takeDamage() // prototype method -> returns the string '<object name> took damage.'
   * should inherit destroy() from GameObject's prototype
 */
-class CharacterStats extends GameObject{
+class CharacterStats extends GameObject {
     constructor(stats) {
         super(stats);
         this.healthPoints = stats.healthPoints;
         this.name = stats.name;
     }
-    takeDamage(){
+    takeDamage() {
         return `${this.name} took damage.`;
     }
 }
@@ -77,7 +77,7 @@ const mage = new Humanoid({
         height: 1,
     },
     healthPoints: 5,
-    name: 'Bruce',A
+    name: 'Bruce',
     team: 'Mage Guild',
     weapons: [
         'Staff of Shamalama',
@@ -119,27 +119,26 @@ const archer = new Humanoid({
     language: 'Elvish',
 });
 
-console.log(mage.createdAt); // Today's date
-console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
-console.log(swordsman.healthPoints); // 15
-console.log(mage.name); // Bruce
-console.log(swordsman.team); // The Round Table
-console.log(mage.weapons); // Staff of Shamalama
-console.log(archer.language); // Elvish
-console.log(archer.greet()); // Lilith offers a greeting in Elvish.
-console.log(mage.takeDamage()); // Bruce took damage.
-console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+// console.log(mage.createdAt); // Today's date
+// console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
+// console.log(swordsman.healthPoints); // 15
+// console.log(mage.name); // Bruce
+// console.log(swordsman.team); // The Round Table
+// console.log(mage.weapons); // Staff of Shamalama
+// console.log(archer.language); // Elvish
+// console.log(archer.greet()); // Lilith offers a greeting in Elvish.
+// console.log(mage.takeDamage()); // Bruce took damage.
+// console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 
 // Stretch task: 
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
-
-class Hero extends Humanoid{
-    constructor(char){
+class Hero extends Humanoid {
+    constructor(char) {
         super(char);
         this.harm = char.harm;
     }
-    attack(target){
+    attack(target) {
         target.healthPoints -= this.harm;
         console.log(`${target.name} was attacked for ${this.harm} damage!!!`);
         console.log(`${target.name} now has ${target.healthPoints} HP.`);
@@ -167,20 +166,18 @@ const max = new Hero({
 });
 
 
-
-function Villain(char) {
-    Humanoid.call(this, char);
-    this.harm = char.harm;
-}
-
-
-// Subtract hp from char attacked
-Villain.prototype.attack = function (target) {
-    target.healthPoints -= this.harm;
-    console.log(`${target.name} was attacked for ${this.harm} damage!!!`);
-    console.log(`${target.name} now has ${target.healthPoints} HP.`);
-    if (target.healthPoints <= 0) {
-        console.log(`${this.name} is the winner!`);
+class Villain extends Humanoid {
+    constructor(char) {
+        super(char);
+        this.harm = char.harm;
+    }
+    attack(target) {
+        target.healthPoints -= this.harm;
+        console.log(`${target.name} was attacked for ${this.harm} damage!!!`);
+        console.log(`${target.name} now has ${target.healthPoints} HP.`);
+        if (target.healthPoints <= 0) {
+            console.log(`${this.name} is the winner!`);
+        }
     }
 }
 
