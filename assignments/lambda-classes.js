@@ -34,8 +34,8 @@ class Students extends Person {
     // Methods
     listsSubjects() {
         console.log(`My Favorite Subjects Are:`)
-        this.favSubjects.forEach((i) => {
-            console.log(`${this.favSubjects[i]}`);  //Todo: Debug This !!!
+        this.favSubjects.forEach((element) => {
+            console.log(`${[element]}`);
         });
     }
     PRAssignment(subject) {
